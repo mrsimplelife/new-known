@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Interactive Web</title>
+    <link rel="stylesheet" href="css/reset.css" />
+    <style>
+      .characters {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        background: #fff000;
+      }
+      .ilbuni {
+        width: 100px;
+        cursor: pointer;
+      }
+      img {
+        max-width: 100%;
+        height: auto;
+      }
+      /* .characters .ilbuni {
+        display: inline-block;
+      } */
+      .special {
+        border: 10px dashed red;
+      }
+    </style>
+    <!-- <script defer>
+      document.addEventListener("DOMContentLoaded", () => {
+        const ilbuni = document.querySelector(".ilbuni");
+        ilbuni.addEventListener("click", () => {
+          ilbuni.classList.toggle("special");
+        });
+      });
+    </script> -->
+  </head>
+  <body>
+    <div class="characters">
+      <div class="ilbuni a">
+        <img src="images/ilbuni_0.png" alt="일분이" />
+      </div>
+      <div class="ilbuni b">
+        <img src="images/ilbuni_1.png" alt="일분이" />
+      </div>
+      <div class="ilbuni c">
+        <img src="images/ilbuni_2.png" alt="일분이" />
+      </div>
+      <div class="ilbuni d">
+        <img src="images/ilbuni_3.png" alt="일분이" />
+      </div>
+    </div>
+    <script defer>
+      (() => {
+        "use strict";
+        const characters = document.querySelector(".characters");
+        // ilbuni.addEventListener("click", () => {
+        //   console.log(this);
+        //   ilbuni.classList.toggle("special");
+        // });
+        characters.addEventListener("click", function (e) {
+          console.log(this, e.currentTarget, e.target);
+          const { target } = e;
+          if (target.tagName === "IMG") {
+            target.classList.toggle("special");
+          }
+        });
+      })();
+    </script>
+  </body>
+</html>
