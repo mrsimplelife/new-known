@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Interactive Web</title>
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div class="stage">
+      <div class="door">
+        <div class="door-back">
+          <div class="ilbuni"></div>
+        </div>
+        <div class="door-body"></div>
+      </div>
+      <div class="door">
+        <div class="door-back">
+          <div class="ilbuni"></div>
+        </div>
+        <div class="door-body"></div>
+      </div>
+      <div class="door">
+        <div class="door-back">
+          <div class="ilbuni"></div>
+        </div>
+        <div class="door-body"></div>
+      </div>
+    </div>
+
+    <script>
+      (() => {
+        const stage = document.querySelector(".stage");
+        let currentOpened;
+        stage.addEventListener("click", (e) => {
+          // const currentOpened = document.querySelector(".door-opened");
+          // if (currentOpened) {
+          //   currentOpened.classList.remove("door-opened");
+          // }
+          currentOpened?.classList.remove("door-opened");
+          const { target } = e;
+          target.classList.contains("door-body") && activate(target.parentNode);
+          // if (target.classList.contains("door-body")) {
+          //   // const { parentNode } = target;
+          //   // parentNode.classList.add("door-opened");
+          //   // currentOpened = parentNode;
+          //   activate(target.parentNode);
+          // }
+        });
+
+        // currentOpened = document.querySelector(".door:nth-child(2)");
+        // currentOpened.classList.add("door-opened");
+        activate(document.querySelector(".door:nth-child(2)"));
+
+        function activate(door) {
+          door.classList.add("door-opened");
+          currentOpened = door;
+        }
+      })();
+    </script>
+  </body>
+</html>
