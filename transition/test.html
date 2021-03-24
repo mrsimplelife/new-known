@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      main {
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+      }
+      .container {
+        width: 350px;
+        height: 350px;
+        border: 1px solid red;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+      }
+      .tree {
+        width: 50px;
+        height: 50px;
+        background-color: dodgerblue;
+        border-radius: 50%;
+      }
+      .fromcenter {
+        animation: fromcenter 1s forwards linear;
+      }
+      .fromtop {
+        animation: fromtop 1s 1s backwards linear;
+      }
+      @keyframes fromcenter {
+        to {
+          transform: translate(200px, 200px);
+        }
+      }
+      @keyframes fromtop {
+        from {
+          transform: translate(-200px, -200px);
+        }
+        to {
+          transform: translate(0, 0);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="container">
+        <div class="tree"></div>
+      </div>
+      <button class="start">start</button>
+    </main>
+    <script>
+      const tree = document.querySelector(".tree");
+      const moving = () => {
+        tree.classList.toggle("fromcenter");
+        tree.classList.toggle("fromtop");
+      };
+      const movingOnce = () => {
+        if (tree.classList.contains("fromtop")) {
+          tree.classList.remove("fromtop");
+          tree.removeEventListener("animationend", movingOnce);
+          return;
+        }
+        moving();
+      };
+      const start = () => {
+        if (
+          tree.classList.contains("fromcenter") |
+          tree.classList.contains("fromtop")
+        ) {
+          tree.removeEventListener("animationend", movingOnce);
+        } else {
+          tree.classList.add("fromcenter");
+        }
+        tree.addEventListener("animationend", moving);
+      };
+      const stop = () => {
+        tree.removeEventListener("animationend", moving);
+        tree.addEventListener("animationend", movingOnce);
+      };
+      const button = document.querySelector("button");
+      button.addEventListener("click", () => {
+        if (button.classList.contains("start")) {
+          start();
+          button.classList.remove("start");
+          button.textContent = "stop";
+        } else {
+          stop();
+          button.classList.add("start");
+          button.textContent = "start";
+        }
+      });
+    </script>
+  </body>
+</html>
