@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Transition/Animation Event</title>
+    <style>
+      .ball {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background: red;
+        transition: 1s;
+      }
+      .ball.end {
+        background: dodgerblue;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="ball"></div>
+    <script>
+      const ball = document.querySelector(".ball");
+
+      window.addEventListener("click", (event) => {
+        const { clientX, clientY } = event;
+        // console.log(clientX, clientY);
+        ball.style.transform = `translate(${event.clientX - 15}px, ${
+          event.clientY - 15
+        }px`;
+      });
+
+      // ball.addEventListener("transitionstart", (event) => {
+      //   ball.classList.remove("end");
+      //   console.log(event.elapsedTime);
+      //   console.log(event.propertyName);
+      // });
+      ball.addEventListener("transitionend", (event) => {
+        ball.classList.add("end");
+        console.log(event.elapsedTime); //transition duration
+        console.log(event.propertyName);
+      });
+    </script>
+  </body>
+</html>
